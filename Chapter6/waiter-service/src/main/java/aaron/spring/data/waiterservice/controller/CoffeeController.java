@@ -1,0 +1,25 @@
+package aaron.spring.data.waiterservice.controller;
+
+import aaron.spring.data.waiterservice.model.Coffee;
+import aaron.spring.data.waiterservice.service.CoffeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/coffee")
+public class CoffeeController {
+    @Autowired
+    private CoffeeService coffeeService;
+
+    @RequestMapping("/all")
+    @ResponseBody
+    public List<Coffee> getAll() {
+        return coffeeService.getAllCoffee();
+        // requestMapping 不加上 method 参数，get 和 post 都可以访问。
+    }
+}

@@ -1,0 +1,1 @@
+CREATE TABLE FOO (ID INT auto_increment, BAR VARCHAR(64));
