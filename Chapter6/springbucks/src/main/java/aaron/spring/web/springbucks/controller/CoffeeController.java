@@ -1,5 +1,6 @@
 package aaron.spring.web.springbucks.controller;
 
+import aaron.spring.web.springbucks.controller.request.NewCoffeeRequest;
 import aaron.spring.web.springbucks.model.Coffee;
 import aaron.spring.web.springbucks.service.CoffeeService;
 import lombok.extern.slf4j.Slf4j;
