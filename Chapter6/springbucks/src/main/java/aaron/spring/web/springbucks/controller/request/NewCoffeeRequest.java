@@ -1,4 +1,4 @@
-package aaron.spring.web.springbucks.controller;
+package aaron.spring.web.springbucks.controller.request;
 
 import lombok.Data;
 import org.joda.money.Money;
