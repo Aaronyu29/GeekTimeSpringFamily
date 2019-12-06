@@ -10,6 +10,6 @@ import org.aspectj.lang.annotation.Aspect;
 public class FooAspect {
     @AfterReturning("bean(testBean*)")
     public void printAfter() {
-      log.info("After print hello");
+        log.info("After print hello");
     }
 }

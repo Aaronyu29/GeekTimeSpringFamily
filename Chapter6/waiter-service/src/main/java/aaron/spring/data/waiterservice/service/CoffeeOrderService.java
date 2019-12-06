@@ -18,12 +18,12 @@ public class CoffeeOrderService {
     @Autowired
     private CoffeeOrderRepository orderRepository;
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffee) {
+    public CoffeeOrder createOrder(String customer, Coffee... coffee) {
         CoffeeOrder order = CoffeeOrder.builder()
                 .customer(customer).items(Arrays.asList(coffee))
                 .state(OrderState.INIT).build();
         CoffeeOrder saved = orderRepository.save(order);
-        log.info("New Order : {}",saved);
+        log.info("New Order : {}", saved);
         return saved;
     }
 

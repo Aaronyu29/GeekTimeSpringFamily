@@ -8,8 +8,8 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-  <bean id="testBeanX" class="aaron.spring.web.contexthierarchy.context.TestBean">
-      <constructor-arg name="context" value="Bar"/>
-  </bean>
-<!--    <bean id="fooAspect" class="aaron.spring.web.contexthierarchy.foo.FooAspect"></bean>-->
+    <bean id="testBeanX" class="aaron.spring.web.contexthierarchy.context.TestBean">
+        <constructor-arg name="context" value="Bar"/>
+    </bean>
+    <!--    <bean id="fooAspect" class="aaron.spring.web.contexthierarchy.foo.FooAspect"></bean>-->
 </beans>

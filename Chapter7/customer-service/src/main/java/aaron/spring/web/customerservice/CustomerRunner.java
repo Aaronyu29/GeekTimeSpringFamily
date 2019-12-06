@@ -34,7 +34,7 @@ public class CustomerRunner implements ApplicationRunner {
 
     private void queryOrder(Long id) {
         CoffeeOrder order = restTemplate.getForObject("http://localhost:8080/order/{id}", CoffeeOrder.class, id);
-        log.info("Query id: {}",order);
+        log.info("Query id: {}", order);
     }
 
     private Long orderCoffee() {
@@ -46,17 +46,18 @@ public class CustomerRunner implements ApplicationRunner {
                 .post(UriComponentsBuilder.fromUriString("http://localhost:8080/order/").build().toUri())
                 .body(orderRequest);
         ResponseEntity<CoffeeOrder> responseEntity = restTemplate.exchange(request, CoffeeOrder.class);
-        log.info("Order Request Status Code: {}",responseEntity.getStatusCode());
+        log.info("Order Request Status Code: {}", responseEntity.getStatusCode());
         Long id = responseEntity.getBody().getId();
-        log.info("New id : {}",id);
+        log.info("New id : {}", id);
         return id;
     }
 
     private void readMenu() {
-        ParameterizedTypeReference<List<Coffee>> reference = new ParameterizedTypeReference<List<Coffee>>() {};
+        ParameterizedTypeReference<List<Coffee>> reference = new ParameterizedTypeReference<List<Coffee>>() {
+        };
         ResponseEntity<List<Coffee>> entity =
                 restTemplate.exchange("http://localhost:8080/coffee/", HttpMethod.GET, null, reference);
-        entity.getBody().forEach(c -> log.info("Coffee List: {}",c));
+        entity.getBody().forEach(c -> log.info("Coffee List: {}", c));
 
     }
 }

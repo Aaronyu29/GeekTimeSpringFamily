@@ -16,24 +16,24 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories
 @EnableTransactionManagement
 @EnableCaching(proxyTargetClass = true)
-public class CacheDemoApplication  implements ApplicationRunner {
-	@Autowired
-	private CoffeeService coffeeService;
+public class CacheDemoApplication implements ApplicationRunner {
+    @Autowired
+    private CoffeeService coffeeService;
 
-	public static void main(String[] args) {
-		SpringApplication.run(CacheDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CacheDemoApplication.class, args);
+    }
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		log.info("Count of Order {}",coffeeService.findAllCoffee().size());
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        log.info("Count of Order {}", coffeeService.findAllCoffee().size());
 
-		for(int i = 0; i<10; i++) {
-			log.info("Reading from cache.");
-			coffeeService.findAllCoffee();
-		}
-		coffeeService.reloadCoffee();
-		log.info("refreshing the cache.");
-		coffeeService.findAllCoffee().forEach(c -> log.info("Coffee {}",c));
-	}
+        for (int i = 0; i < 10; i++) {
+            log.info("Reading from cache.");
+            coffeeService.findAllCoffee();
+        }
+        coffeeService.reloadCoffee();
+        log.info("refreshing the cache.");
+        coffeeService.findAllCoffee().forEach(c -> log.info("Coffee {}", c));
+    }
 }

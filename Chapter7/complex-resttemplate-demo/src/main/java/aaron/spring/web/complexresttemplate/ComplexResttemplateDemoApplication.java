@@ -27,6 +27,7 @@ import java.util.List;
 public class ComplexResttemplateDemoApplication implements ApplicationRunner {
     @Autowired
     private RestTemplate restTemplate;
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
@@ -48,18 +49,19 @@ public class ComplexResttemplateDemoApplication implements ApplicationRunner {
         RequestEntity<Void> requestEntity = RequestEntity.get(uri).accept(MediaType.APPLICATION_XML).build();
         ResponseEntity<String> response = restTemplate.exchange(requestEntity, String.class);
         // accept 指定客户端接受的内容类型。
-        log.info("Response status: {}, Response Header: {}",response.getStatusCode(),response.getHeaders().toString());
-        log.info("Response body: {}",response.getBody());
+        log.info("Response status: {}, Response Header: {}", response.getStatusCode(), response.getHeaders().toString());
+        log.info("Response body: {}", response.getBody());
 
         String CoffeeUri = "http://localhost:8080/coffee/";
         Coffee request = Coffee.builder().name("Americano")
                 .price(Money.of(CurrencyUnit.of("CNY"), 25.00)).build();
         Coffee coffee = restTemplate.postForObject(CoffeeUri, request, Coffee.class);
-        log.info("New Coffee: {}",coffee);
+        log.info("New Coffee: {}", coffee);
 
-        ParameterizedTypeReference<List<Coffee>> reference = new ParameterizedTypeReference<List<Coffee>>(){};
+        ParameterizedTypeReference<List<Coffee>> reference = new ParameterizedTypeReference<List<Coffee>>() {
+        };
         ResponseEntity<List<Coffee>> entity = restTemplate.exchange(CoffeeUri, HttpMethod.GET, null, reference);
-        entity.getBody().forEach(c -> log.info("Coffee:{} ",c));
+        entity.getBody().forEach(c -> log.info("Coffee:{} ", c));
 
     }
 }

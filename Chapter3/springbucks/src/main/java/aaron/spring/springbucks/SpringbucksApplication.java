@@ -29,19 +29,20 @@ public class SpringbucksApplication implements ApplicationRunner {
     private CoffeeOrderService coffeeOrderService;
     @Autowired
     private CoffeeRepository coffeeRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringbucksApplication.class, args);
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info("All Coffee {} ",coffeeRepository.findAll());
+        log.info("All Coffee {} ", coffeeRepository.findAll());
 
         Optional<Coffee> latte = coffeeService.findOneCoffee("latte");
-        if(latte.isPresent()) {
+        if (latte.isPresent()) {
             CoffeeOrder order = coffeeOrderService.createOrder("Li lei", latte.get());
-            log.info("Update init to paid {}",coffeeOrderService.updateState(order, OrderState.PAID));
-            log.info("Update paid to init {}",coffeeOrderService.updateState(order,OrderState.INIT));
+            log.info("Update init to paid {}", coffeeOrderService.updateState(order, OrderState.PAID));
+            log.info("Update paid to init {}", coffeeOrderService.updateState(order, OrderState.INIT));
         }
     }
 }

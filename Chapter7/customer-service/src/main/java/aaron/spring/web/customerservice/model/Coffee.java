@@ -8,6 +8,7 @@ import org.joda.money.Money;
 
 import java.io.Serializable;
 import java.util.Date;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -30,6 +30,7 @@ public class WebclientDemoApplication implements ApplicationRunner {
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
+
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
         return builder.baseUrl("http://localhost:8080").build();
@@ -41,14 +42,14 @@ public class WebclientDemoApplication implements ApplicationRunner {
         CountDownLatch countDownLatch = new CountDownLatch(2);
 
         webClient.get()
-                .uri("/coffee/{id}",1)
+                .uri("/coffee/{id}", 1)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Coffee.class)
-                .doOnError(t -> log.error("Error: ",t))
+                .doOnError(t -> log.error("Error: ", t))
                 .doFinally(s -> countDownLatch.countDown())
                 .subscribeOn(Schedulers.single())
-                .subscribe(s -> log.info("Coffee 1 : {}",s));
+                .subscribe(s -> log.info("Coffee 1 : {}", s));
 
 
         Mono<Coffee> mono = Mono.just(Coffee.builder()
@@ -56,12 +57,12 @@ public class WebclientDemoApplication implements ApplicationRunner {
 
         webClient.post()
                 .uri("/coffee/")
-                .body(mono,Coffee.class)
+                .body(mono, Coffee.class)
                 .retrieve()
                 .bodyToMono(Coffee.class)
                 .doFinally(s -> countDownLatch.countDown())
                 .subscribeOn(Schedulers.single())
-                .subscribe(s -> log.info("Coffee Created: {}",s));
+                .subscribe(s -> log.info("Coffee Created: {}", s));
         countDownLatch.await();
 
         webClient.get()
@@ -69,7 +70,7 @@ public class WebclientDemoApplication implements ApplicationRunner {
                 .retrieve()
                 .bodyToFlux(Coffee.class)
                 .toStream()
-                .forEach(c -> log.info("Coffee in list: {}",c));
+                .forEach(c -> log.info("Coffee in list: {}", c));
 
     }
 }

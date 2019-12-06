@@ -24,9 +24,9 @@ public class CoffeeOrderController {
     @PostMapping("/createOrder")
     @ResponseStatus(HttpStatus.CREATED)
     public CoffeeOrder create(@RequestBody NewOrderRequest newOrder) {
-        log.info("Receive new Order {}",newOrder);
+        log.info("Receive new Order {}", newOrder);
         Coffee[] coffeeList = coffeeService.getCoffeeByName(newOrder.getItems())
                 .toArray(new Coffee[]{});
-        return orderService.createOrder(newOrder.getCustomer(),coffeeList);
+        return orderService.createOrder(newOrder.getCustomer(), coffeeList);
     }
 }

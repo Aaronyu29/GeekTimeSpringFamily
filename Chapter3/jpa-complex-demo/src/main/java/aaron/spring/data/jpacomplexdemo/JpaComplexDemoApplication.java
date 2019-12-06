@@ -44,14 +44,14 @@ public class JpaComplexDemoApplication implements CommandLineRunner {
     }
 
     private void findorders() {
-        coffeeRepository.findAll(Sort.by(Sort.Direction.DESC,"id"))
+        coffeeRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
                 .forEach(c -> log.info("Loading  " + c));
 
         List<CoffeeOrder> list = orderRepository.findTop3ByOrderByUpdateTimeDescIdAsc();
         log.info("findTop3ByOrderByUpdateTimeDescIdAsc: " + getJoinedOrderId(list));
 
         list = orderRepository.findByCustomerOrderById("Li lei");
-        log.info("findByCustomerOrderById: "+getJoinedOrderId(list));
+        log.info("findByCustomerOrderById: " + getJoinedOrderId(list));
 
         list.forEach(o -> {
             log.info("Order {}", o.getId());
@@ -79,8 +79,8 @@ public class JpaComplexDemoApplication implements CommandLineRunner {
         orderRepository.save(order);
         log.info("Order : " + order);
 
-        order = CoffeeOrder.builder().customer("Li lei").items(Arrays.asList(espresso,latte)).state(OrderState.INIT).build();
+        order = CoffeeOrder.builder().customer("Li lei").items(Arrays.asList(espresso, latte)).state(OrderState.INIT).build();
         orderRepository.save(order);
-        log.info("Order2 : "+ order);
+        log.info("Order2 : " + order);
     }
 }

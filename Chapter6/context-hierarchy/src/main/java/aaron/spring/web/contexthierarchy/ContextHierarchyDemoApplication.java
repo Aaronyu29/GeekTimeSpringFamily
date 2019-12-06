@@ -30,11 +30,11 @@ public class ContextHierarchyDemoApplication implements ApplicationRunner {
 
         log.info("================");
 
-        bean = soncontext.getBean("testBeanX",TestBean.class);
+        bean = soncontext.getBean("testBeanX", TestBean.class);
         bean.hello();
 
         // 在子上下文中寻找 bean: testBeanY,没有找到，委托父上下文找，命中，返回 testBeanY(hello)。
-        bean = soncontext.getBean("testBeanY",TestBean.class);
+        bean = soncontext.getBean("testBeanY", TestBean.class);
         bean.hello();
 
         /**

@@ -16,6 +16,7 @@ public class DruidDemoFaqApplication implements CommandLineRunner {
     private DataSource dataSource;
     @Autowired
     private FooService fooService;
+
     public static void main(String[] args) {
         SpringApplication.run(DruidDemoFaqApplication.class, args);
     }

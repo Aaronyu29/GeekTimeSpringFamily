@@ -3,5 +3,5 @@ package aaron.spring.web.complexcontroller.repository;
 import aaron.spring.web.complexcontroller.model.CoffeeOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CoffeeOrderRepository  extends JpaRepository<CoffeeOrder,Long> {
+public interface CoffeeOrderRepository extends JpaRepository<CoffeeOrder, Long> {
 }

@@ -22,14 +22,14 @@ public class CoffeeOrderService {
         return orderRepository.getOne(id);
     }
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffees){
+    public CoffeeOrder createOrder(String customer, Coffee... coffees) {
         CoffeeOrder coffeeOrder = CoffeeOrder.builder()
                 .customer(customer)
                 .items(Arrays.asList(coffees))
                 .state(OrderState.INIT)
                 .build();
         CoffeeOrder saved = orderRepository.save(coffeeOrder);
-        log.info("New Order : {}",saved);
+        log.info("New Order : {}", saved);
         return saved;
     }
 }

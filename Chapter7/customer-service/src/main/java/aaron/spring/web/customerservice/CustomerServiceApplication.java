@@ -30,8 +30,9 @@ public class CustomerServiceApplication {
                 .web(WebApplicationType.NONE)
                 .run(args);
     }
+
     @Bean
-    public HttpComponentsClientHttpRequestFactory httpRequestFactory(){
+    public HttpComponentsClientHttpRequestFactory httpRequestFactory() {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(30, TimeUnit.SECONDS);
         connectionManager.setMaxTotal(200);
         connectionManager.setDefaultMaxPerRoute(20);

@@ -7,6 +7,7 @@ import org.joda.money.Money;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "T_COFFEE")
 @Data

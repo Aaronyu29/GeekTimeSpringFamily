@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
+@Entity // 对实体注释。任何 Hibernate 映射对象都要有这个注释。
 @Table(name = "T_MENU_Coffee")
 @Data
 @ToString(callSuper = true)
@@ -20,6 +20,6 @@ public class Coffee extends BaseEntity implements Serializable {
     private String name;
 
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyMinorAmount",
-    parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode",value = "CNY")})
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
     private Money money;
 }

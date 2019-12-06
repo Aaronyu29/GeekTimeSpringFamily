@@ -22,6 +22,7 @@ public class CoffeeService {
     public Coffee saveCoffee(String name, Money price) {
         return coffeeRepository.save(Coffee.builder().name(name).price(price).build());
     }
+
     @Cacheable
     public List<Coffee> findAllCoffee() {
         return coffeeRepository.findAll(Sort.by("id"));

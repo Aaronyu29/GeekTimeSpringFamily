@@ -21,18 +21,19 @@ public class CoffeeOrderController {
     private CoffeeService coffeeService;
     @Autowired
     private CoffeeOrderService orderService;
+
     @GetMapping("/{id}")
     public CoffeeOrder getOrder(@PathVariable("id") Long id) {
         CoffeeOrder coffeeOrder = orderService.get(id);
-        log.info("Get Order: {}",coffeeOrder);
+        log.info("Get Order: {}", coffeeOrder);
         return coffeeOrder;
     }
 
 
-    @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public CoffeeOrder create(@RequestBody NewOrderRequest orderRequest) {
-        log.info("Receive new Order: {}",orderRequest);
+        log.info("Receive new Order: {}", orderRequest);
         Coffee[] coffees = coffeeService.getAllCoffeeByNames(orderRequest.getItems())
                 .toArray(new Coffee[]{});
         return orderService.createOrder(orderRequest.getCustomer(), coffees);

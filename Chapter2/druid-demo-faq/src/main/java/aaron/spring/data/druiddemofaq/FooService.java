@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class FooService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Transactional
     public void selectForUpdate() {
         // for update 是在事务里锁住记录。
-        jdbcTemplate.queryForObject("select id from foo where id = 1 for update",Long.class);
+        jdbcTemplate.queryForObject("select id from foo where id = 1 for update", Long.class);
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {

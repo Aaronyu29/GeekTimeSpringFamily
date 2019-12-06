@@ -22,10 +22,12 @@ public class SpringbucksApplication implements WebMvcConfigurer {
         registry.addInterceptor(new PerformanceInteceptor())
                 .addPathPatterns("/coffee/**").addPathPatterns("/order/**");
     }
+
     @Bean
     public Hibernate5Module hibernate5Module() {
         return new Hibernate5Module();
     }
+
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> {

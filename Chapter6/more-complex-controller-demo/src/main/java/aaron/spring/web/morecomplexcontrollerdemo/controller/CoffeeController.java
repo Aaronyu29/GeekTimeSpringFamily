@@ -28,16 +28,17 @@ import java.util.List;
 public class CoffeeController {
     @Autowired
     private CoffeeService coffeeService;
-    @PostMapping(path = "/",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+    @PostMapping(path = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public Coffee addCoffee(@Valid NewCoffeeRequest newCoffeeRequest,
                             BindingResult result) {
-        if(result.hasErrors()) {
-            log.warn("Result {}",result);
+        if (result.hasErrors()) {
+            log.warn("Result {}", result);
             return null;
         }
-        return coffeeService.saveCoffee(newCoffeeRequest.getName(),newCoffeeRequest.getPrice());
+        return coffeeService.saveCoffee(newCoffeeRequest.getName(), newCoffeeRequest.getPrice());
     }
 
    /* @PostMapping(path = "/",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -47,23 +48,23 @@ public class CoffeeController {
         return coffeeService.saveCoffee(newCoffeeRequest.getName(),newCoffeeRequest.getPrice());
     }*/
 
-    @PostMapping(path = "/",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public List<Coffee> batchAddCoffee(@RequestParam("file") MultipartFile file) {
         List<Coffee> list = new ArrayList<>();
-        if(!file.isEmpty()) {
+        if (!file.isEmpty()) {
             BufferedReader reader = null;
             try {
                 reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
                 String str;
-                while ((str =reader.readLine()) != null) {
+                while ((str = reader.readLine()) != null) {
                     String[] arr = str.split(" ");
                     list.add(coffeeService.saveCoffee(arr[0],
                             Money.of(CurrencyUnit.of("CNY"), NumberUtils.createBigDecimal(arr[1]))));
                 }
             } catch (IOException e) {
-                log.error("error: {}",e);
+                log.error("error: {}", e);
             } finally {
                 IOUtils.closeQuietly(reader);
             }

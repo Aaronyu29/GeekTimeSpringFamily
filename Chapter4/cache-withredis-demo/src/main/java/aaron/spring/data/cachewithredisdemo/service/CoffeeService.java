@@ -23,6 +23,7 @@ public class CoffeeService {
 
         return coffeeRepository.findAll();
     }
+
     @CacheEvict
     public void reloadCoffee() {
         log.info("reload cache");

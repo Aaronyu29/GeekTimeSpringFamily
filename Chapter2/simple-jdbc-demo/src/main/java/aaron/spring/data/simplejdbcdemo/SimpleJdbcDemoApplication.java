@@ -16,6 +16,7 @@ public class SimpleJdbcDemoApplication implements CommandLineRunner {
     private FooDao fooDao;
     @Autowired
     private BatchFooDao batchFooDao;
+
     public static void main(String[] args) {
         SpringApplication.run(SimpleJdbcDemoApplication.class, args);
     }

@@ -19,19 +19,19 @@ public class CofferOrderService {
     public CoffeeOrder createOrder(Coffee... coffees) {
         CoffeeOrder saved = CoffeeOrder.builder().items(Arrays.asList(coffees)).state(OrderState.INIT).build();
         orderRepository.save(saved);
-        log.info("Saved Order",saved);
+        log.info("Saved Order", saved);
         return saved;
     }
 
-    public boolean updateOrder(CoffeeOrder coffeeOrder,OrderState state) {
-        if(state.compareTo(coffeeOrder.getState()) <= 0) {
-            log.warn("Wrong State Order: {},{}",coffeeOrder.getState(),state);
+    public boolean updateOrder(CoffeeOrder coffeeOrder, OrderState state) {
+        if (state.compareTo(coffeeOrder.getState()) <= 0) {
+            log.warn("Wrong State Order: {},{}", coffeeOrder.getState(), state);
             return false;
         }
 
         coffeeOrder.setState(state);
         orderRepository.save(coffeeOrder);
-        log.info("Update state: {}",coffeeOrder);
+        log.info("Update state: {}", coffeeOrder);
         return true;
     }
 }

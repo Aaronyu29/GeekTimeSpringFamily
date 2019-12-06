@@ -36,7 +36,7 @@ public class DatasourceDemoApplication implements CommandLineRunner {
         jdbcTemplate.queryForList("select * from FOO").forEach(row -> log.info(row.toString()));
     }
 
-    private void showConnections()  throws SQLException {
+    private void showConnections() throws SQLException {
         log.info(dataSource.toString());
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());

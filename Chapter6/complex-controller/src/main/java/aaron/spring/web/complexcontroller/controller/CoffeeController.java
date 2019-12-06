@@ -21,14 +21,14 @@ public class CoffeeController {
     public List<Coffee> getAll() {
         return coffeeService.getAllCoffee();
     }*/
-    @RequestMapping(path = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Coffee getById(@PathVariable Long id) {
         return coffeeService.getOneCoffee(id);
         // pathVariable 指定把 URI 中参数传给 Long 的 id，必须写一样
     }
 
-    @RequestMapping(path = "/",params = "name")
+    @RequestMapping(path = "/", params = "name")
     @ResponseBody
     // a method parameter should be bound to a web
     // * request parameter.
@@ -41,7 +41,7 @@ public class CoffeeController {
         return coffeeService.getCoffee(abc);
     }*/
     public Coffee getByName(String name) {
-        log.info("Name {}",name);
+        log.info("Name {}", name);
         return coffeeService.getCoffee(name);
     }
 }

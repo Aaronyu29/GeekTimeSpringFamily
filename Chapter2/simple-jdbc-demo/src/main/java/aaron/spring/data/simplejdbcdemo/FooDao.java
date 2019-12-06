@@ -23,16 +23,16 @@ public class FooDao {
     private SimpleJdbcInsert simpleJdbcInsert;
 
     public void insertData() {
-        Arrays.asList("b","c","ddd").forEach(bar -> jdbcTemplate.update("insert into FOO(BAR) values(?)",bar));
+        Arrays.asList("b", "c", "ddd").forEach(bar -> jdbcTemplate.update("insert into FOO(BAR) values(?)", bar));
         // 下面是使用 simpleJDBCINsert 的结果，首先要将 simpleJDBCInsert 加入容器中进行管理。
-        HashMap<String,String> row = new HashMap<>();
-        row.put("BAR","xyz");
+        HashMap<String, String> row = new HashMap<>();
+        row.put("BAR", "xyz");
         Number id = simpleJdbcInsert.executeAndReturnKey(row);
-        log.info("ID of value " +id.longValue());
+        log.info("ID of value " + id.longValue());
     }
 
     public void listData() {
-        log.info("count {} "+ jdbcTemplate.queryForObject("select count(*) from FOO",Long.class));
+        log.info("count {} " + jdbcTemplate.queryForObject("select count(*) from FOO", Long.class));
         List<String> list = jdbcTemplate.queryForList("select bar from FOO", String.class);
         list.forEach((String s) -> log.info("Bar {} " + s));
         // 下面是封装到对象中

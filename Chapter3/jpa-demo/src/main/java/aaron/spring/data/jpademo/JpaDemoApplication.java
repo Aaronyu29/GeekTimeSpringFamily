@@ -24,6 +24,7 @@ public class JpaDemoApplication implements CommandLineRunner {
     private CoffeeRepository coffeeReposity;
     @Autowired
     private CoffeeOrderRepository coffeeOrderRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(JpaDemoApplication.class, args);
     }
@@ -40,7 +41,7 @@ public class JpaDemoApplication implements CommandLineRunner {
         coffeeReposity.save(espresso);
         log.info("Coffee1 {} " + espresso);
         Coffee latte = Coffee.builder().name("lattee")
-                .money(Money.of(CurrencyUnit.of("CNY"),30.0)).build();
+                .money(Money.of(CurrencyUnit.of("CNY"), 30.0)).build();
         coffeeReposity.save(latte);
         log.info("Coffee2 {} " + latte);
 
@@ -48,9 +49,9 @@ public class JpaDemoApplication implements CommandLineRunner {
                 .items(Collections.singletonList(espresso))
                 .build();
         coffeeOrderRepository.save(order);
-        log.info("CoffeeOrder1 {} " +order);
+        log.info("CoffeeOrder1 {} " + order);
 
-        order = CoffeeOrder.builder().customer("Li lei").state(0).items(Arrays.asList(espresso,latte)).build();
+        order = CoffeeOrder.builder().customer("Li lei").state(0).items(Arrays.asList(espresso, latte)).build();
         coffeeOrderRepository.save(order);
         log.info("CoffeeOrder2 {} " + order);
 

@@ -37,9 +37,10 @@ public class JedisDemoApplication implements ApplicationRunner {
     public JedisPoolConfig jedisPoolConfig() {
         return new JedisPoolConfig();
     }
+
     @Bean(destroyMethod = "close")
     public JedisPool jedisPool(@Value("${redis.host}") String host) {
-        return new JedisPool(jedisPoolConfig(),host);
+        return new JedisPool(jedisPoolConfig(), host);
     }
 
 
@@ -50,7 +51,7 @@ public class JedisDemoApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info(jedisPoolConfig.toString());
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             coffeeService.findAllCoffee().forEach(c -> {
                 jedis.hset("springbucks-menu", c.getName(), Long.toString(c.getPrice().getAmountMinorLong()));
             });

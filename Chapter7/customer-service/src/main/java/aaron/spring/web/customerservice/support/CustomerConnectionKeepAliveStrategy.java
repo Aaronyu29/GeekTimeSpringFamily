@@ -17,10 +17,10 @@ public class CustomerConnectionKeepAliveStrategy implements ConnectionKeepAliveS
 
         return Arrays.asList(response.getHeaders(HTTP.CONN_KEEP_ALIVE))
                 .stream()
-                .filter(h -> StringUtils.equalsIgnoreCase("timeout",h.getName())
-                && StringUtils.isNumeric(h.getValue()))
+                .filter(h -> StringUtils.equalsIgnoreCase("timeout", h.getName())
+                        && StringUtils.isNumeric(h.getValue()))
                 .findFirst()
-                .map(h -> NumberUtils.toLong(h.getValue(),DEFAULT_SECONDS))
+                .map(h -> NumberUtils.toLong(h.getValue(), DEFAULT_SECONDS))
                 .orElse(DEFAULT_SECONDS) * 1000;
     }
 }

@@ -18,21 +18,21 @@ public class CoffeeOrderService {
     @Autowired
     private CoffeeOrderRepository orderRepository;
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffees) {
+    public CoffeeOrder createOrder(String customer, Coffee... coffees) {
         CoffeeOrder order = CoffeeOrder.builder().customer(customer)
                 .items(Arrays.asList(coffees)).state(OrderState.INIT).build();
         orderRepository.save(order);
-        log.info("New order: {}",order);
+        log.info("New order: {}", order);
         return order;
     }
 
-    public boolean update(CoffeeOrder order,OrderState state) {
-        if(state.compareTo(order.getState()) <= 0) {
-            log.warn("It's not allowed to change the {}, to {}",order.getState(),state);
+    public boolean update(CoffeeOrder order, OrderState state) {
+        if (state.compareTo(order.getState()) <= 0) {
+            log.warn("It's not allowed to change the {}, to {}", order.getState(), state);
             return false;
         }
         order.setState(state);
-        log.info("New Order {}",order);
+        log.info("New Order {}", order);
         return true;
     }
 }

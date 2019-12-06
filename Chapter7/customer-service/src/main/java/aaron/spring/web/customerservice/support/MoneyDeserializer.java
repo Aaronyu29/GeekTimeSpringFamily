@@ -14,7 +14,7 @@ import java.io.IOException;
 public class MoneyDeserializer extends StdDeserializer<Money> {
     @Override
     public Money deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-        return Money.of(CurrencyUnit.of("CNY"),jsonParser.getDecimalValue());
+        return Money.of(CurrencyUnit.of("CNY"), jsonParser.getDecimalValue());
     }
 
     public MoneyDeserializer() {

@@ -12,16 +12,17 @@ import javax.sql.DataSource;
 @Slf4j
 @SpringBootApplication
 public class DruidFilterApplication implements CommandLineRunner {
-	@Autowired
-	private DataSource dataSource;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	public static void main(String[] args) {
-		SpringApplication.run(DruidFilterApplication.class, args);
-	}
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public void run(String... args) throws Exception {
-		log.info(dataSource.toString());
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DruidFilterApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        log.info(dataSource.toString());
+    }
 }

@@ -35,7 +35,7 @@ public class CoffeeService {
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.exact().ignoreCase());
         Optional<Coffee> coffee = coffeeRepository.findOne(Example.of(Coffee.builder().name(name).build(), matcher));
-        log.info("Coffee Found {}",coffee);
+        log.info("Coffee Found {}", coffee);
         return coffee;
     }
 }

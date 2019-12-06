@@ -19,7 +19,7 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @CreationTimestamp
-    @Column(updatable= false)
+    @Column(updatable = false)
     private Date createTime;
     @UpdateTimestamp
     private Date updateTime;

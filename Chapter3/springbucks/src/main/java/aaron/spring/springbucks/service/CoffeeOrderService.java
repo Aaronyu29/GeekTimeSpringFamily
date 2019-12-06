@@ -20,27 +20,27 @@ public class CoffeeOrderService {
 
     /**
      * Java 中开始的语法，接受 0 或多个 coffee 参数。
+     *
      * @param customer
      * @param coffee
      * @return
      */
-    public CoffeeOrder createOrder(String customer, Coffee... coffee){
+    public CoffeeOrder createOrder(String customer, Coffee... coffee) {
         CoffeeOrder order = CoffeeOrder.builder().customer(customer).items(Arrays.asList(coffee)).state(OrderState.INIT).build();
         CoffeeOrder saved = orderRepository.save(order);
-        log.info("New CoffeeOrder {}",saved);
+        log.info("New CoffeeOrder {}", saved);
         return saved;
     }
+
     public boolean updateState(CoffeeOrder order, OrderState state) {
-        if(state.compareTo(order.getState()) <= 0) {
-            log.warn("Wrong State Order: {}, {}",state,order.getState());
+        if (state.compareTo(order.getState()) <= 0) {
+            log.warn("Wrong State Order: {}, {}", state, order.getState());
             return false;
         }
         order.setState(state);
         orderRepository.save(order);
         return true;
     }
-
-
 
 
 }

@@ -7,6 +7,7 @@ import org.joda.money.Money;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
+
 @JsonComponent
 public class MoneySerializer extends StdSerializer<Money> {
     protected MoneySerializer() {

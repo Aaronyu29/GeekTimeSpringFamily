@@ -5,6 +5,7 @@ import org.joda.money.Money;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 @Data
 public class NewCoffeeRequest {
     @NotEmpty

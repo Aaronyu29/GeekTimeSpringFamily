@@ -23,35 +23,35 @@ import java.util.Optional;
 @EnableTransactionManagement
 @Slf4j
 public class RedisDemoApplication implements ApplicationRunner {
-	@Autowired
-	private CoffeeService coffeeService;
+    @Autowired
+    private CoffeeService coffeeService;
 
 
-	public LettuceClientConfigurationBuilderCustomizer customizer() {
-		return builder -> builder.readFrom(ReadFrom.MASTER_PREFERRED);
-	}
+    public LettuceClientConfigurationBuilderCustomizer customizer() {
+        return builder -> builder.readFrom(ReadFrom.MASTER_PREFERRED);
+    }
 
-	@Bean
-	public RedisTemplate<String, Coffee> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    @Bean
+    public RedisTemplate<String, Coffee> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 
-		RedisTemplate<String, Coffee> template = new RedisTemplate<>();
-		template.setConnectionFactory(redisConnectionFactory);
-		return template;
-	}
+        RedisTemplate<String, Coffee> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        return template;
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(RedisDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RedisDemoApplication.class, args);
+    }
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		Optional<Coffee> coffee = coffeeService.findOneCoffee("mocha");
-		log.info("Coffee {}",coffee);
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        Optional<Coffee> coffee = coffeeService.findOneCoffee("mocha");
+        log.info("Coffee {}", coffee);
 
-		for(int i = 0; i< 5; i++) {
-			coffee = coffeeService.findOneCoffee("mocha");
-		}
-		log.info("Value from redis {}",coffee);
+        for (int i = 0; i < 5; i++) {
+            coffee = coffeeService.findOneCoffee("mocha");
+        }
+        log.info("Value from redis {}", coffee);
 
-	}
+    }
 }

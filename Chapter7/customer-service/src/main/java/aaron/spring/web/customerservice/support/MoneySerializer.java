@@ -7,12 +7,14 @@ import org.joda.money.Money;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
+
 @JsonComponent
 public class MoneySerializer extends StdSerializer<Money> {
     @Override
     public void serialize(Money money, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeNumber(money.getAmount());
     }
+
     public MoneySerializer() {
         super(Money.class);
     }

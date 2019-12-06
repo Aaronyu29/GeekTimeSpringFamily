@@ -11,14 +11,15 @@ import java.util.Arrays;
 
 public class CustomerConnectionKeepAliveStrategy implements ConnectionKeepAliveStrategy {
     private final long DEFAULT_SECONDS = 30;
+
     @Override
     public long getKeepAliveDuration(HttpResponse httpResponse, HttpContext httpContext) {
 
         return Arrays.asList(httpResponse.getHeaders(HTTP.CONN_KEEP_ALIVE))
                 .stream()
-                .filter(h -> StringUtils.equalsIgnoreCase(h.getName(),"timeout"))
+                .filter(h -> StringUtils.equalsIgnoreCase(h.getName(), "timeout"))
                 .findFirst()
-                .map(h -> NumberUtils.toLong(h.getValue(),DEFAULT_SECONDS))
+                .map(h -> NumberUtils.toLong(h.getValue(), DEFAULT_SECONDS))
                 .orElse(DEFAULT_SECONDS) * 1000;
         // 单位为毫秒，转为 毫秒。
     }

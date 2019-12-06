@@ -17,9 +17,10 @@ import java.net.URI;
 
 @SpringBootApplication
 @Slf4j
-public class SimpleResttemplateDemoApplication  implements ApplicationRunner {
+public class SimpleResttemplateDemoApplication implements ApplicationRunner {
     @Autowired
     private RestTemplate restTemplate;
+
     public static void main(String[] args) {
 
         new SpringApplicationBuilder()
@@ -39,8 +40,8 @@ public class SimpleResttemplateDemoApplication  implements ApplicationRunner {
         URI uri = UriComponentsBuilder.fromUriString("http://localhost:8080/coffee/{id}")
                 .build(1);
         ResponseEntity<Coffee> entity = restTemplate.getForEntity(uri, Coffee.class);
-        log.info("Response Status {}, Response Headers: {}",entity.getStatusCode(),entity.getHeaders().toString());
-        log.info("Coffee {}",entity.getBody());
+        log.info("Response Status {}, Response Headers: {}", entity.getStatusCode(), entity.getHeaders().toString());
+        log.info("Coffee {}", entity.getBody());
         // 要开启 Chapter6 的 SpringBucks 服务。
 
         String coffeeUri = "http://localhost:8080/coffee/";
@@ -48,10 +49,10 @@ public class SimpleResttemplateDemoApplication  implements ApplicationRunner {
                 .name("Americano").price(BigDecimal.valueOf(25.00))
                 .build();
         Coffee coffee = restTemplate.postForObject(coffeeUri, coffeeRequest, Coffee.class);
-        log.info("coffee {}",coffee);
+        log.info("coffee {}", coffee);
 
         String allCoffee = restTemplate.getForObject(coffeeUri, String.class);
-        log.info("allCoffee: {}",allCoffee);
+        log.info("allCoffee: {}", allCoffee);
 
 
     }

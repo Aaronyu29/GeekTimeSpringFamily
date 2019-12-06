@@ -20,7 +20,7 @@ public class MoneyHandler extends BaseTypeHandler<Money> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Money parameter, JdbcType jdbcType) throws SQLException {
-        ps.setLong(i,parameter.getAmountMinorLong());
+        ps.setLong(i, parameter.getAmountMinorLong());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MoneyHandler extends BaseTypeHandler<Money> {
     }
 
     private Money parseMoney(long aLong) {
-        return Money.ofMinor(CurrencyUnit.of("CNY"),aLong);
+        return Money.ofMinor(CurrencyUnit.of("CNY"), aLong);
     }
 
     @Override

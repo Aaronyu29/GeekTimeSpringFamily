@@ -19,12 +19,13 @@ public class CoffeeController {
     @Autowired
     private CoffeeService coffeeService;
 
-    @GetMapping(value = "/",params = "!name")
+    @GetMapping(value = "/", params = "!name")
     @ResponseBody
     public List<Coffee> getAll() {
         return coffeeService.getAll();
     }
-    @GetMapping(value = "/",params = "name")
+
+    @GetMapping(value = "/", params = "name")
     @ResponseBody
     public Coffee getOneCoffee(@RequestParam String name) {
         return coffeeService.getCoffeeByName(name);
@@ -32,16 +33,16 @@ public class CoffeeController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public  Coffee getById(@PathVariable Long id) {
+    public Coffee getById(@PathVariable Long id) {
         Coffee coffee = coffeeService.getById(id);
-        log.info("Coffee {}",coffee);
+        log.info("Coffee {}", coffee);
         return coffee;
     }
 
-    @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Coffee addCoffeeWithoutBindingResult(@Valid @RequestBody NewCoffeeRequest newCoffeeRequest) {
-        return coffeeService.saveCoffee(newCoffeeRequest.getName(),newCoffeeRequest.getPrice());
+        return coffeeService.saveCoffee(newCoffeeRequest.getName(), newCoffeeRequest.getPrice());
     }
 
 }

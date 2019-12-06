@@ -28,20 +28,20 @@ public class CoffeeService {
     }
 
     public Optional<Coffee> findOneCoffee(String name) {
-        HashOperations<String,String,Coffee> hashOperations = redisTemplate.opsForHash();
-        if(redisTemplate.hasKey(CACHE) && hashOperations.hasKey(CACHE,name)) {
-            log.info("get coffee from {}",name);
-            return Optional.of(hashOperations.get(CACHE,name));
+        HashOperations<String, String, Coffee> hashOperations = redisTemplate.opsForHash();
+        if (redisTemplate.hasKey(CACHE) && hashOperations.hasKey(CACHE, name)) {
+            log.info("get coffee from {}", name);
+            return Optional.of(hashOperations.get(CACHE, name));
         }
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.exact().ignoreCase());
         Optional<Coffee> coffee = coffeeRepository.findOne(Example.of(Coffee.builder().name(name).build(), matcher));
-        log.info("Found Coffee {} ",coffee);
-        if(coffee.isPresent()) {
-            log.info("Put Coffee {} to redis",name);
-            hashOperations.put(CACHE,name,coffee.get());
-            redisTemplate.expire(CACHE,1, TimeUnit.MINUTES);
+        log.info("Found Coffee {} ", coffee);
+        if (coffee.isPresent()) {
+            log.info("Put Coffee {} to redis", name);
+            hashOperations.put(CACHE, name, coffee.get());
+            redisTemplate.expire(CACHE, 1, TimeUnit.MINUTES);
         }
         return coffee;
     }

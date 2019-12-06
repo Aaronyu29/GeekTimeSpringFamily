@@ -22,11 +22,11 @@ public class CoffeeOrderService {
         return orderRepository.getOne(id);
     }
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffees) {
+    public CoffeeOrder createOrder(String customer, Coffee... coffees) {
         CoffeeOrder order = CoffeeOrder.builder()
                 .customer(customer).state(OrderState.INIT)
                 .items(Arrays.asList(coffees)).build();
-        log.info("New Order {}",order);
+        log.info("New Order {}", order);
         orderRepository.save(order);
         return order;
     }

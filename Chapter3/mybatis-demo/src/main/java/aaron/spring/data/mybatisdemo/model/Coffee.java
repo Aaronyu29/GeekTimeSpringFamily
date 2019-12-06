@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.joda.money.Money;
 
 import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

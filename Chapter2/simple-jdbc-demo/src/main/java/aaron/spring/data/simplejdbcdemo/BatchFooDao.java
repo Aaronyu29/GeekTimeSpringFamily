@@ -24,7 +24,7 @@ public class BatchFooDao {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 //@param parameterIndex the first parameter is 1, the second is 2, ...
-                ps.setString(1,"b-"+i);
+                ps.setString(1, "b-" + i);
             }
 
             @Override

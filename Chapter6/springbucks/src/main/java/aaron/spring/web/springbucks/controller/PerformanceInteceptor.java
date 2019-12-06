@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class PerformanceInteceptor implements HandlerInterceptor {
     private ThreadLocal<StopWatch> stopwatch = new ThreadLocal<>();
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -21,32 +22,33 @@ public class PerformanceInteceptor implements HandlerInterceptor {
         sw.start();
         return true;
     }
+
     @Override
-    public  void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-                    @Nullable ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           @Nullable ModelAndView modelAndView) throws Exception {
         stopwatch.get().stop();
         stopwatch.get().start();
     }
+
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-                         @Nullable Exception ex) throws Exception {
+                                @Nullable Exception ex) throws Exception {
         StopWatch sw = stopwatch.get();
         sw.stop();
         String method = handler.getClass().getName();
-        if(handler instanceof HandlerMethod) {
+        if (handler instanceof HandlerMethod) {
             String beanType = ((HandlerMethod) handler).getBeanType().getName();
             String methodName = ((HandlerMethod) handler).getMethod().getName();
             method = beanType + " " + methodName;
         }
-        log.info("{},{},{},{},{}ms,{}ms,{}ms",request.getRequestURI(),method,
-                response.getStatus(),ex==null ?"-":ex.getClass().getName(),
-                sw.getTotalTimeMillis(),sw.getTotalTimeMillis()-sw.getLastTaskTimeMillis(),
+        log.info("{},{},{},{},{}ms,{}ms,{}ms", request.getRequestURI(), method,
+                response.getStatus(), ex == null ? "-" : ex.getClass().getName(),
+                sw.getTotalTimeMillis(), sw.getTotalTimeMillis() - sw.getLastTaskTimeMillis(),
                 sw.getLastTaskTimeMillis());
         //  sw.getLastTaskTimeMillis() -> post 到 after 的时间
 
         stopwatch.remove();
     }
-
 
 
 }
