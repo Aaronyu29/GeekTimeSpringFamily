@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+aaron.spring.hello.greeting.GreetingAutoConfigure
+
